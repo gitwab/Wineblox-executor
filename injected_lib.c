@@ -5,10 +5,6 @@
 #include <unistd.h>
 #include <dlfcn.h>
 
-typedef void (*GameSendChatFunc)(const char* msg, int type);
-
-#define GAME_SEND_CHAT_MESSAGE_FUNCTION_OFFSET 0x16D2D00
-
 unsigned long get_lib_base(const char* name) {
     char line[512];
     FILE* f = fopen("/proc/self/maps", "r");
@@ -25,19 +21,13 @@ unsigned long get_lib_base(const char* name) {
     return addr;
 }
 
-void print_str(const char* message) {
-    unsigned long base = get_lib_base("libroblox.so");
-    if (base == 0) return;
-
-    unsigned long chat_func_addr = base + GAME_SEND_CHAT_MESSAGE_FUNCTION_OFFSET;
-    GameSendChatFunc send_chat_func = (GameSendChatFunc)chat_func_addr;
-
-    if (send_chat_func) {
-        send_chat_func(message, 0);
-    }
+void print_to_console(const char* message) {
+    fprintf(stderr, "[Injected] %s\n", message);
+    fflush(stderr);
 }
 
 __attribute__((constructor))
 void init_lib() {
-    print_str("Atingle loaded!");
+    print_to_console("Diesel executor library loaded successfully!");
+    print_to_console("Library base: 0x%lx", get_lib_base("sober_test_inject.so"));
 }

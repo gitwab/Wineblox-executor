@@ -1,8 +1,13 @@
-# Building Diesel Executor
+# Diesel Executor - Build Guide
 
-## Prerequisites
+## System Requirements
+- **OS**: Linux (Ubuntu, Debian, Fedora, Arch, Linux Mint, etc.)
+- **Kernel**: 4.4+
+- **Architecture**: x86_64
 
-### Ubuntu/Debian
+## Installation
+
+### Ubuntu/Debian (including Linux Mint)
 ```bash
 sudo apt-get update
 sudo apt-get install -y \
@@ -13,7 +18,7 @@ sudo apt-get install -y \
   pkg-config
 ```
 
-### Fedora/RHEL
+### Fedora/RHEL/CentOS
 ```bash
 sudo dnf install -y \
   gcc \
@@ -26,74 +31,119 @@ sudo dnf install -y \
 
 ### Arch Linux
 ```bash
-sudo pacman -S base-devel gtk4 lua
+sudo pacman -Syu
+sudo pacman -S base-devel gtk4 lua pkg-config
 ```
 
-## Build Steps
+## Building
 
-1. **Clone or navigate to repository:**
+### Quick Build
 ```bash
 cd Diesel-executor
-```
-
-2. **Build all components:**
-```bash
 make clean
 make
 ```
 
-This will generate three files:
-- `atingle` - GTK4 GUI application
-- `injector` - ptrace-based injection tool
-- `sober_test_inject.so` - Shared library to inject
+### Verify Build
+```bash
+ls -la atingle injector sober_test_inject.so
+```
+
+You should see three executable/library files.
 
 ## Running
 
-1. **Start the Sober client first** (on Linux, with Roblox)
+### Prerequisites
+1. **Linux Mint/Ubuntu** - You need Sober client installed and running
+2. **Permissions** - ptrace injection requires same user or elevated privileges
 
-2. **Run the GUI:**
+### Start Sober Client
+```bash
+# In another terminal, start the Sober client with Roblox
+# This is required before using the executor
+```
+
+### Launch Executor
 ```bash
 ./atingle
 ```
 
-3. **In the GUI:**
-   - Write Lua scripts in the text editor
-   - Click **"Attach"** to inject into Sober process
-   - Click **"Execute"** to run scripts
+A GTK window will open with:
+- **Text Editor** - Write Lua scripts
+- **Buttons**:
+  - `Execute` - Execute current script
+  - `Clear` - Clear editor
+  - `Open File` - Load script from disk
+  - `Save File` - Save script to disk
+  - `Attach` - Inject into Sober process
 
-## Files Generated
-
-| File | Purpose |
-|------|---------|
-| `atingle` | Main executable with GTK4 GUI |
-| `injector` | Helper tool for ptrace injection |
-| `sober_test_inject.so` | Library containing Lua runtime |
+### Status Display
+Watch the status bar at the bottom for injection results and errors.
 
 ## Troubleshooting
 
-### "Process with name containing 'sober' not found"
-- Sober client is not running
-- Start Sober/Roblox first before clicking Attach
+### Build Errors
 
-### "Injector failed"
-- May need elevated privileges for ptrace
-- Try: `sudo ./atingle`
-
-### Build fails with GTK4 errors
+**"gtk4 not found"**
 ```bash
-# Verify GTK4 is installed:
+# Verify GTK4 installation
 pkg-config --cflags --libs gtk4
+
+# Reinstall if needed
+sudo apt-get install --reinstall libgtk-4-dev
 ```
 
-### Lua library not found
+**"gcc: command not found"**
 ```bash
-# Find lua packages:
-pkg-config --list-all | grep lua
+# Install build tools
+sudo apt-get install build-essential  # Ubuntu/Debian
+sudo dnf install gcc make             # Fedora
+sudo pacman -S base-devel             # Arch
 ```
 
-## Clean Build
+### Runtime Errors
 
+**"Sober process not found"**
+- Make sure Sober client is running
+- Check with: `ps aux | grep sober`
+
+**"Error: injector binary not found"**
+- Run from the directory containing the compiled `injector` binary
+- Make sure `make` completed successfully
+
+**"Injection failed"**
+- ptrace might require elevated privileges
+- Try: `sudo ./atingle`
+- Or check kernel ptrace restrictions: `cat /proc/sys/kernel/yama/ptrace_scope`
+
+### Linux Mint Specific
+
+Linux Mint is based on Ubuntu/Debian, so use the Ubuntu/Debian instructions above.
+
+If you have issues with GTK4:
+```bash
+# Mint uses apt just like Ubuntu
+sudo apt-get install -y libgtk-4-dev libgtk-4-1
+```
+
+## Advanced Usage
+
+### Using injector standalone
+```bash
+# By process name
+./injector sober /path/to/library.so
+
+# By PID
+./injector 1234 /path/to/library.so
+```
+
+### Debug mode
+```bash
+# Run with output redirection
+./atingle 2>&1 | tee debug.log
+```
+
+## Cleanup
 ```bash
 make clean
-make
 ```
