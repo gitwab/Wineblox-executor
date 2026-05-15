@@ -1,4 +1,4 @@
-# Diesel executor
+# Wineblox executor
 
 > External Roblox executor for the unofficial Sober client on Linux. Injects Lua via `.so` and `ptrace`.
 
