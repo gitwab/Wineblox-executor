@@ -12,6 +12,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <limits.h>
+#include <ctype.h>
 
 pid_t find_pid(const char* name) {
     DIR* d = opendir("/proc");
