@@ -6,7 +6,7 @@
 [![Platform: Linux](https://img.shields.io/badge/platform-Linux-yellow)]()
 [![Language: C](https://img.shields.io/badge/language-C-red)]()
 
-## Stort eh
+## Stort hiere
 
 ```bash
 # Clone and build
@@ -49,7 +49,7 @@ make                 # Build all components
 
 See [INSTALL.md](INSTALL.md) for detailed instructions.
 
-## 📖 Usage
+## Usage
 
 ### Basic Injection
 ```bash
@@ -82,7 +82,7 @@ sudo ./injector sober /path/to/library.so
 
 See [INSTALL.md#troubleshooting](INSTALL.md#troubleshooting) for more detailed solutions.
 
-## 🔨 Build Targets
+## Build Targets
 
 ```bash
 make                    # Build everything
