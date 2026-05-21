@@ -19,17 +19,10 @@ chmod +x build.sh
 sudo ./injector sober
 ```
 
-## ✨ Features
-
-| Feature | Status | Description |
-|---------|--------|-------------|
-| **Process Injection** | ✅ Working | Injects Lua scripts into running ROBLOX process |
-| **Lua Scripting** | ✅ Working | Execute Lua code with injected library |
-| **Auto Process Detection** | ✅ Working | Automatically finds ROBLOX process by name |
-| **GTK4 UI** | ⚠️ Optional | Enhanced graphical interface with Script Hub |
-| **Script Hub** | ⚠️ Optional | Download and manage scripts online |
-
-## 📋 Requirements
+## What it can do for now
+ - Inject basic scripts
+ - Could be unstable
+## Requirements (yes)
 
 - Linux OS (Ubuntu/Debian, Fedora, Arch)
 - Wine (for running ROBLOX)
@@ -38,7 +31,7 @@ sudo ./injector sober
 - GTK4 (optional, for GUI)
 - libcurl (optional, for Script Hub)
 
-## 🔧 Installation
+##  Installation
 
 ### Easy Way (Recommended)
 ```bash
@@ -78,36 +71,7 @@ sudo ./injector sober /path/to/library.so
 # Launch UI
 ./atingle_enhanced
 ```
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────┐
-│         User Interface (GTK4)           │
-│         atingle_enhanced                │
-└──────────────┬──────────────────────────┘
-               │
-┌──────────────▼──────────────────────────┐
-│      Injector (injector binary)         │
-│  • Process detection                    │
-│  • ptrace attachment                    │
-│  • Library injection via dlopen         │
-└──────────────┬──────────────────────────┘
-               │
-┌──────────────▼──────────────────────────┐
-│  ROBLOX Process (RobloxPlayerBeta.exe)  │
-│         running on Wine                 │
-└──────────────┬──────────────────────────┘
-               │
-┌──────────────▼──────────────────────────┐
-│  Injected Library (sober_test_inject.so)│
-│  • Lua environment                      │
-│  • Executor API functions               │
-│  • Script execution                     │
-└─────────────────────────────────────────┘
-```
-
-## 🐛 Troubleshooting
+## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
@@ -130,14 +94,14 @@ make clean              # Remove built files
 make help               # Show all targets
 ```
 
-## ⚠️ Security & Legal
+## To know
 
 - Requires elevated privileges (`sudo`) to attach to processes
 - May be detected by anti-cheat systems
 - Only use on systems you own or have explicit permission
 - Intended for educational and authorized testing purposes only
 
-## 📦 Components
+## Components
 
 | Component | Type | Purpose |
 |-----------|------|---------|
@@ -147,17 +111,18 @@ make help               # Show all targets
 | `Makefile` | Build | Compilation rules and targets |
 | `build.sh` | Script | Automated build wrapper |
 
-## 🤝 Contributing
+## Contributing
 
 Found a bug or have a feature request? 
 - Submit an [Issue](https://github.com/gitwab/Wineblox-executor/issues)
 - Create a [Pull Request](https://github.com/gitwab/Wineblox-executor/pulls)
+- Trust me this has inf bugs
 
-## 📄 License
+## License
 
-This project is released under the [Unlicense](https://unlicense.org/) - It's in the public domain.
+This project is released under the [Unlicense](https://unlicense.org/) - ye
 
-## 🙏 Credits
+## Credits
 
 - Based on [AtingleExecutor](https://github.com/AtingleTeam/AtingleExecutor)
 - ptrace injection technique inspired by reverse engineering community
@@ -167,6 +132,6 @@ This project is released under the [Unlicense](https://unlicense.org/) - It's in
 
 <div align="center">
 
-[⬆ back to top](#wineblox-executor)
+[⬆ back to top,good boy!](#wineblox-executor)
 
 </div>
