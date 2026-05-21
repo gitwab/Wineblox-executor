@@ -6,7 +6,7 @@
 [![Platform: Linux](https://img.shields.io/badge/platform-Linux-yellow)]()
 [![Language: C](https://img.shields.io/badge/language-C-red)]()
 
-## 🚀 Quick Start
+## Stort eh
 
 ```bash
 # Clone and build
